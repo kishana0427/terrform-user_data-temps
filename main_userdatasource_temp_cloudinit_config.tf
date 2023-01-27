@@ -12,12 +12,14 @@ variable "amis" {
 variable "region" {
   type = "string"
   default = "us-east-1"
-}resource "aws_instance" "myinstance1" {
+}
+resource "aws_instance" "myinstance1" {
   ami           = "${lookup(var.amis, var.region)}"
   key_name = "ireland"
   instance_type = "t2.micro"
   user_data = "${data.template_cloudinit_config.config.rendered}"
-}data "template_cloudinit_config" "config" {
+}
+data "template_cloudinit_config" "config" {
   base64_encode = truepart {
     content_type = "text/x-shellscript"
     content      = "${data.template_file.myuserdata.template}"
