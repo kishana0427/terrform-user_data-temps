@@ -1,6 +1,8 @@
 provider "aws" {}
 data "template_file" "myuserdata" {
-  template = "${file("${path.cwd}/myuserdata.tpl")}"}variable "amis" {
+  template = "${file("${path.cwd}/myuserdata.tpl")}"
+}
+variable "amis" {
   type = "map"
   default = {
     "eu-west-1" = "ami-0c21ae4a3bd190229"
